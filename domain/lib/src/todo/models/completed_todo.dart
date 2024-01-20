@@ -1,10 +1,10 @@
 import 'package:domain/src/todo/exceptions/invalid_todo_date_exception.dart';
 import 'package:domain/src/todo/models/todo.dart';
 
-class CompletedToDo extends Todo {
+class CompletedTodo extends Todo {
   final DateTime completedDate;
 
-  CompletedToDo({
+  CompletedTodo({
     required super.title,
     required super.description,
     required super.isCompleted,
