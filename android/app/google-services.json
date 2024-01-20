@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1074198567601",
+    "project_id": "grupor5-89270",
+    "storage_bucket": "grupor5-89270.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074198567601:android:25c14a783b1a5b82756090",
+        "android_client_info": {
+          "package_name": "com.example.todo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkGhCw_YtpCosyJerH9CgULthVH4uoUog"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
