@@ -8,7 +8,7 @@ void main() {
       //Arrange
       const title = 'Verify AC';
       const description = 'Check AC for each floor';
-      const isComplited = false;
+      const isCompleted = false;
       DateTime createdDate = DateTime.now().add(Duration(days: -20));
 
       //Act-Assert
@@ -16,10 +16,28 @@ void main() {
           () => Todo(
                 title: title,
                 description: description,
-                isCompleted: isComplited,
+                isCompleted: isCompleted,
                 createdDate: createdDate,
               ),
           throwsA(isA<InvalidTodoDateException>()));
+    });
+
+    test(' > Todo created with valid parameters > Expect instanfe of Todo Model', () {
+      //Arrange
+      const title = 'Idnetiy backyard vulnerabilities';
+      const description = 'Establish posible entrances for a thief';
+      const isComplited = false;
+      DateTime createdDate = DateTime.now();
+
+      //Act-Assert
+      expect(
+          Todo(
+            title: title,
+            description: description,
+            isCompleted: isComplited,
+            createdDate: createdDate,
+          ),
+          isA<Todo>());
     });
   });
 }

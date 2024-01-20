@@ -1,3 +1,5 @@
+import 'package:domain/src/todo/exceptions/empty_todo_description_exception.dart';
+import 'package:domain/src/todo/exceptions/empty_todo_title_exception.dart';
 import 'package:domain/src/todo/exceptions/invalid_todo_date_exception.dart';
 
 class Todo {
@@ -10,6 +12,8 @@ class Todo {
   static const limitDaysForOpenTodo = 5;
 
   Todo({required this.title, required this.description, required this.isCompleted, required this.createdDate}) {
+    if (title.isEmpty) throw EmptyTodoTitleException();
+    if (description.isEmpty) throw EmptyTodoDescriptionException();
     validateDate();
   }
 
