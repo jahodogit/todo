@@ -7,14 +7,17 @@ class Todo {
   final DateTime createdDate;
 
   //This line just represents a domain rule to show only items created in the last 5 dyas
-  static const limitDaysForOpenToDo = 5;
+  static const limitDaysForOpenTodo = 5;
 
-  Todo({required this.title, required this.description, required this.isCompleted, required this.createdDate});
+  Todo({required this.title, required this.description, required this.isCompleted, required this.createdDate}) {
+    validateDate();
+  }
 
   void validateDate() {
     DateTime now = DateTime.now();
-    Duration daysLimit = Duration(days: -5);
 
-    if (createdDate.isAfter(now.add(daysLimit))) throw InvalidTodoDateException();
+    int difference = createdDate.difference(now).inDays.abs();
+
+    if (difference > limitDaysForOpenTodo) throw InvalidTodoDateException();
   }
 }
