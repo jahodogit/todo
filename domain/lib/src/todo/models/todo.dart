@@ -12,8 +12,8 @@ class Todo {
   static const limitDaysForOpenTodo = 5;
 
   Todo({required this.title, required this.description, required this.isCompleted, required this.createdDate}) {
-    if (title.isEmpty) throw EmptyTodoTitleException();
-    if (description.isEmpty) throw EmptyTodoDescriptionException();
+    if (title.trim().isEmpty) throw EmptyTodoTitleException();
+    if (description.trim().isEmpty) throw EmptyTodoDescriptionException();
     validateDate();
   }
 

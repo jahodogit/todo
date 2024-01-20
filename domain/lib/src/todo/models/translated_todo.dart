@@ -6,7 +6,7 @@ class TranslatedTodo {
   final String description;
 
   TranslatedTodo({required this.title, required this.description}) {
-    if (title.isEmpty) throw EmptyTodoTitleException();
-    if (description.isEmpty) throw EmptyTodoDescriptionException();
+    if (title.trim().isEmpty) throw EmptyTodoTitleException();
+    if (description.trim().isEmpty) throw EmptyTodoDescriptionException();
   }
 }
