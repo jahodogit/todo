@@ -6,6 +6,7 @@ void main() {
   group('CompletedTodo Model ', () {
     test('> Creeate model with a date after the currenta datetime > Expect InvalidTodoDateException', () {
       //Arrange
+      const id = 'uid';
       const title = 'Verify AC';
       const description = 'Check AC for each floor';
       const isCompleted = false;
@@ -15,6 +16,7 @@ void main() {
       //Act-Assert
       expect(
           () => CompletedTodo(
+                id: id,
                 title: title,
                 description: description,
                 isCompleted: isCompleted,

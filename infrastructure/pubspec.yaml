@@ -1,15 +1,16 @@
 name: infrastructure
 description: A starting point for Dart libraries or applications.
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+publish_to: none
 
 environment:
   sdk: ^3.2.1
 
 # Add regular dependencies here.
 dependencies:
-  # path: ^1.8.0
+  domain:
+    path: ../domain
+  cloud_firestore: ^4.14.0
 
 dev_dependencies:
-  lints: ^2.1.0
-  test: ^1.24.0
+  lints: ^3.0.0

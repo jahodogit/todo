@@ -5,6 +5,7 @@ class CompletedTodo extends Todo {
   final DateTime completedDate;
 
   CompletedTodo({
+    required super.id,
     required super.title,
     required super.description,
     required super.isCompleted,

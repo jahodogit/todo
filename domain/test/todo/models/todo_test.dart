@@ -8,6 +8,7 @@ void main() {
   group('Todo model', () {
     test(' > Todo created since 20 days before now > Expect InvalidTodoDateException', () {
       //Arrange
+      const id = 'uid';
       const title = 'Verify AC';
       const description = 'Check AC for each floor';
       const isCompleted = false;
@@ -16,6 +17,7 @@ void main() {
       //Act-Assert
       expect(
           () => Todo(
+                id: id,
                 title: title,
                 description: description,
                 isCompleted: isCompleted,
@@ -26,6 +28,7 @@ void main() {
 
     test(' > Todo created with valid parameters > Expect instanfe of Todo Model', () {
       //Arrange
+      const id = 'uid';
       const title = 'Idnetiy backyard vulnerabilities';
       const description = 'Establish posible entrances for a thief';
       const isComplited = false;
@@ -34,6 +37,7 @@ void main() {
       //Act-Assert
       expect(
           Todo(
+            id: id,
             title: title,
             description: description,
             isCompleted: isComplited,
@@ -44,6 +48,7 @@ void main() {
 
     test('> Create Todo with empty title > Expect EmptyTodoTitleException', () {
       //Arrange
+      const id = 'uid';
       const title = '';
       const description = 'Check AC for each floor';
       const isCompleted = false;
@@ -51,6 +56,7 @@ void main() {
       //Act-Assert
       expect(
           () => Todo(
+                id: id,
                 title: title,
                 description: description,
                 isCompleted: isCompleted,
@@ -61,6 +67,7 @@ void main() {
 
     test('> Create Todo with empty description > Expect EmptyTodoDescriptionException', () {
       //Arrange
+      const id = 'uid';
       const title = 'A title string';
       const description = '';
       const isCompleted = false;
@@ -68,6 +75,7 @@ void main() {
       //Act-Assert
       expect(
           () => Todo(
+                id: id,
                 title: title,
                 description: description,
                 isCompleted: isCompleted,
@@ -78,6 +86,7 @@ void main() {
 
     test('> Create Todo with whitespaces description > Expect EmptyTodoDescriptionException', () {
       //Arrange
+      const id = 'uid';
       const title = 'A title string';
       const description = '                 ';
       const isCompleted = false;
@@ -85,6 +94,7 @@ void main() {
       //Act-Assert
       expect(
           () => Todo(
+                id: id,
                 title: title,
                 description: description,
                 isCompleted: isCompleted,
