@@ -6,6 +6,8 @@ class TodoItemState extends Equatable {
   List<Object?> get props => [];
 }
 
+class TodoItemInitialState extends TodoItemState {}
+
 class TodoItemLoadingTranslateState extends TodoItemState {}
 
 class TodoItemSuccessTranslateState extends TodoItemState {

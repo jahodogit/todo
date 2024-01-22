@@ -19,9 +19,10 @@ class TodoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'R5 Todo app',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 35, 243, 42)),
         useMaterial3: true,
       ),
       home: const HomePage(),
