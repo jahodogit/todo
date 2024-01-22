@@ -1,6 +1,7 @@
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/todo/widgets/todo_item_widget.dart';
+import 'package:todo/todo/widgets/todo_list_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,12 +25,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: Column(
-        children: [
-          TodoItemWidget(todo: todo),
-          TodoItemWidget(todo: todo),
-        ],
-      ),
+      body: const TodoListPage(),
     );
   }
 }
