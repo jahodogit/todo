@@ -38,6 +38,7 @@ dependencies:
   cloud_firestore: ^4.14.0
   domain:
     path: ./domain
+  equatable: ^2.0.5
   firebase_core: ^2.24.2
   infrastructure:
     path: ./infrastructure
