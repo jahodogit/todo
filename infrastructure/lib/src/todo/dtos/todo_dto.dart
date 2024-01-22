@@ -4,6 +4,7 @@ class TodoDto {
   String description;
   bool isCompleted;
   DateTime createdDate;
+  DateTime? completedDate;
 
   TodoDto({
     required this.id,
@@ -11,6 +12,7 @@ class TodoDto {
     required this.description,
     required this.isCompleted,
     required this.createdDate,
+    this.completedDate,
   });
 
   Map<String, dynamic> toJson() => {
@@ -18,5 +20,16 @@ class TodoDto {
         'description': description,
         'isCompleted': isCompleted,
         'createdDate': createdDate,
+        'completedDate': completedDate,
       };
+
+  factory TodoDto.fromJson(Map<String, dynamic> json) {
+    return TodoDto(
+        id: json['id'],
+        title: json['title'],
+        description: json['description'],
+        isCompleted: json['isCompleted'],
+        createdDate: DateTime.now() //json['createdDate'],
+        );
+  }
 }

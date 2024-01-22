@@ -4,29 +4,35 @@ import 'package:infrastructure/src/todo/anticorruption/todo_translator.dart';
 import 'package:infrastructure/src/todo/dtos/todo_dto.dart';
 
 class FirebaseFirestoreTodoRepository implements TodoRepository {
-  final FirebaseFirestore db;
-  static const collectionName = 'todo';
+  final FirebaseFirestore _db;
+  static const _collectionName = 'todo';
 
-  FirebaseFirestoreTodoRepository({required this.db});
+  FirebaseFirestoreTodoRepository({required FirebaseFirestore db}) : _db = db;
 
   @override
-  Future<void> delete(Todo todo) async => db.collection(collectionName).doc(todo.id).delete();
+  Future<void> delete(Todo todo) async => _db.collection(_collectionName).doc(todo.id).delete();
 
   @override
   Stream<List<Todo>> getAll() {
-    return db.collection(collectionName).get().asStream().cast();
+    Stream<QuerySnapshot<Map<String, dynamic>>> stream = _db.collection(_collectionName).snapshots();
+    return stream.map((event) {
+      return event.docs.map((doc) {
+        return TodoTranslator.fromDocumentToDomain(TodoDto.fromJson(doc.data()));
+      }).toList();
+    });
   }
 
   @override
   Future<void> save(Todo todo) async {
     TodoDto dto = TodoTranslator.fromDomainToDocument(todo);
-    await db.collection(collectionName).doc(todo.id).set(dto.toJson());
+    await _db.collection(_collectionName).doc(todo.id).set(dto.toJson());
   }
 
   @override
   Future<void> updateStatus(Todo todo) async {
     TodoDto dto = TodoTranslator.fromDomainToDocument(todo);
     dto.isCompleted = !dto.isCompleted;
-    await db.collection(collectionName).doc(todo.id).update(dto.toJson());
+    dto.completedDate = DateTime.now();
+    await _db.collection(_collectionName).doc(todo.id).update(dto.toJson());
   }
 }
