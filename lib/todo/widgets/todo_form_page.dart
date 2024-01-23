@@ -55,6 +55,8 @@ class _TodoFormPageState extends State<TodoFormPage> {
                       String description = descriptionController.text;
 
                       BlocProvider.of<TodoFormCubit>(context).saveTodo(title, description);
+
+                      Navigator.of(context).pop();
                     },
                     child: const Text('Guardar'),
                   )
