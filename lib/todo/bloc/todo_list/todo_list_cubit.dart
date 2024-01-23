@@ -22,4 +22,20 @@ class TodoListCubit extends Cubit<TodoListState> {
       emit(TodoListErrorState(error: error.toString()));
     }
   }
+
+  void updateStatus(Todo todo) async {
+    try {
+      await _todoRepository.updateStatus(todo);
+    } catch (error) {
+      emit(TodoListErrorState(error: error.toString()));
+    }
+  }
+
+  void deleteTodo(Todo todo) async {
+    try {
+      await _todoRepository.delete(todo);
+    } catch (error) {
+      emit(TodoListErrorState(error: error.toString()));
+    }
+  }
 }

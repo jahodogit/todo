@@ -8,8 +8,8 @@ class TodoTranslator {
       title: todo.title,
       description: todo.description,
       isCompleted: todo.isCompleted,
-      createdDate: todo.createdDate,
-      completedDate: todo is CompletedTodo ? todo.completedDate : null,
+      createdDate: Timestamp.fromDate(todo.createdDate),
+      completedDate: todo is CompletedTodo ? Timestamp.fromDate(todo.completedDate) : null,
     );
   }
 
@@ -23,7 +23,7 @@ class TodoTranslator {
           title: todoDto.title,
           description: todoDto.description,
           isCompleted: todoDto.isCompleted,
-          createdDate: todoDto.createdDate,
+          createdDate: todoDto.createdDate.toDate(),
         );
       case true:
         return CompletedTodo(
@@ -31,8 +31,8 @@ class TodoTranslator {
           title: todoDto.title,
           description: todoDto.description,
           isCompleted: todoDto.isCompleted,
-          createdDate: todoDto.createdDate,
-          completedDate: todoDto.completedDate!,
+          createdDate: todoDto.createdDate.toDate(),
+          completedDate: todoDto.completedDate!.toDate(),
         );
     }
   }

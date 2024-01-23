@@ -35,7 +35,10 @@ class FirebaseFirestoreTodoRepository implements TodoRepository {
   Future<void> updateStatus(Todo todo) async {
     TodoDto dto = TodoTranslator.fromDomainToDocument(todo);
     dto.isCompleted = !dto.isCompleted;
-    dto.completedDate = DateTime.now();
-    await _db.collection(_collectionName).doc(todo.id).update(dto.toJson());
+    dto.completedDate = Timestamp.fromDate(DateTime.now());
+    await _db.collection(_collectionName).doc(todo.id).update({
+      'completedDate': dto.completedDate,
+      'isCompleted': dto.isCompleted,
+    });
   }
 }

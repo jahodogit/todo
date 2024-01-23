@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class TodoDto {
   String title;
   String description;
   bool isCompleted;
-  DateTime createdDate;
-  DateTime? completedDate;
+  Timestamp createdDate;
+  Timestamp? completedDate;
 
   TodoDto({
     required this.title,
@@ -23,7 +25,11 @@ class TodoDto {
 
   factory TodoDto.fromJson(Map<String, dynamic> json) {
     return TodoDto(
-      title: json['title'], description: json['description'], isCompleted: json['isCompleted'], createdDate: DateTime.now(), //json['createdDate'],
+      title: json['title'],
+      description: json['description'],
+      isCompleted: json['isCompleted'],
+      createdDate: json['createdDate'],
+      completedDate: json['createdDate'],
     );
   }
 }

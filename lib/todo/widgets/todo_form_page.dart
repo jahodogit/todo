@@ -37,6 +37,9 @@ class _TodoFormPageState extends State<TodoFormPage> {
         create: (context) => getIt<TodoFormCubit>(),
         child: BlocConsumer<TodoFormCubit, TodoFormState>(
           builder: (context, state) {
+            if (state is TodoFormSavingState) {
+              return const Center(child: CircularProgressIndicator());
+            }
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
