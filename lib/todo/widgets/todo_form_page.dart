@@ -3,6 +3,7 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infrastructure/infrastructure.dart';
+import 'package:todo/di/dependencies_injection.dart';
 import 'package:todo/todo/bloc/todo_form/todo_form_cubit.dart';
 import 'package:todo/todo/bloc/todo_form/todo_form_state.dart';
 
@@ -33,7 +34,7 @@ class _TodoFormPageState extends State<TodoFormPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Nueva actividad')),
       body: BlocProvider<TodoFormCubit>(
-        create: (context) => TodoFormCubit(todoRepository: todoRepository),
+        create: (context) => getIt<TodoFormCubit>(),
         child: BlocConsumer<TodoFormCubit, TodoFormState>(
           builder: (context, state) {
             return Padding(

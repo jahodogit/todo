@@ -1,8 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:infrastructure/infrastructure.dart';
+import 'package:todo/di/dependencies_injection.dart';
 import 'package:todo/todo/bloc/todo_item/todo_item_cubit.dart';
 import 'package:todo/todo/bloc/todo_item/todo_item_state.dart';
 
@@ -18,16 +17,6 @@ class TodoItemWidget extends StatefulWidget {
 class _TodoItemWidgetState extends State<TodoItemWidget> {
   bool showTranslation = false;
 
-  late FirebaseFirestore db;
-  late TranslatedTodoRepository translatedTodoRepository;
-
-  @override
-  void initState() {
-    db = FirebaseFirestore.instance;
-    translatedTodoRepository = FirebaseTranslatedTodoRepository(db: db);
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -42,7 +31,7 @@ class _TodoItemWidgetState extends State<TodoItemWidget> {
               trailing: ElevatedButton(onPressed: () {}, child: const Text('Terminar')),
             ),
             BlocProvider(
-              create: (_) => TodoItemCubit(translatedTodoRepository: translatedTodoRepository),
+              create: (_) => getIt<TodoItemCubit>(),
               child: BlocConsumer<TodoItemCubit, TodoItemState>(
                 listener: (_, state) {
                   if (state is TodoItemErrorState) {}

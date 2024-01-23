@@ -1,11 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:domain/domain.dart';
+import 'package:infrastructure/infrastructure.dart';
+import 'package:injectable/injectable.dart';
 import 'package:todo/todo/bloc/todo_item/todo_item_state.dart';
 
+@injectable
 class TodoItemCubit extends Cubit<TodoItemState> {
-  final TranslatedTodoRepository _translatedTodoRepository;
+  final FirebaseTranslatedTodoRepository _translatedTodoRepository;
 
-  TodoItemCubit({required TranslatedTodoRepository translatedTodoRepository})
+  TodoItemCubit({required FirebaseTranslatedTodoRepository translatedTodoRepository})
       : _translatedTodoRepository = translatedTodoRepository,
         super(TodoItemInitialState());
 

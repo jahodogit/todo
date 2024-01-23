@@ -1,11 +1,14 @@
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:infrastructure/infrastructure.dart';
+import 'package:injectable/injectable.dart';
 import 'package:todo/todo/bloc/todo_list/todo_list_state.dart';
 
+@injectable
 class TodoListCubit extends Cubit<TodoListState> {
-  final TodoRepository _todoRepository;
+  final FirebaseFirestoreTodoRepository _todoRepository;
 
-  TodoListCubit({required TodoRepository todoRepository})
+  TodoListCubit({required FirebaseFirestoreTodoRepository todoRepository})
       : _todoRepository = todoRepository,
         super(TodoListLoadingState()) {
     getTodos();

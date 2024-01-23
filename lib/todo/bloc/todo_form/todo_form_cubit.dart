@@ -1,12 +1,15 @@
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:infrastructure/infrastructure.dart';
+import 'package:injectable/injectable.dart';
 import 'package:todo/todo/bloc/todo_form/todo_form_state.dart';
 import 'package:uuid/uuid.dart';
 
+@injectable
 class TodoFormCubit extends Cubit<TodoFormState> {
-  final TodoRepository _todoRepository;
+  final FirebaseFirestoreTodoRepository _todoRepository;
 
-  TodoFormCubit({required TodoRepository todoRepository})
+  TodoFormCubit({required FirebaseFirestoreTodoRepository todoRepository})
       : _todoRepository = todoRepository,
         super(TodoFormInitialState());
 

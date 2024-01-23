@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:todo/app_home.dart';
+import 'package:todo/di/dependencies_injection.dart';
 import 'package:todo/shared/routes.dart';
 import 'firebase_options.dart';
 
@@ -9,6 +10,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  configureInjection();
 
   runApp(const TodoApp());
 }
