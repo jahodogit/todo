@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:domain/domain.dart';
 import 'package:infrastructure/infrastructure.dart';
 import 'package:injectable/injectable.dart';
 
