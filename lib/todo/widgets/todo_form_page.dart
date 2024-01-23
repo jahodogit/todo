@@ -56,8 +56,6 @@ class _TodoFormPageState extends State<TodoFormPage> {
                       String description = descriptionController.text;
 
                       BlocProvider.of<TodoFormCubit>(context).saveTodo(title, description);
-
-                      Navigator.of(context).pop();
                     },
                     child: const Text('Guardar'),
                   )
@@ -65,7 +63,15 @@ class _TodoFormPageState extends State<TodoFormPage> {
               ),
             );
           },
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is TodoFormErrorState) {
+              SnackBar snackBar = SnackBar(content: Text(state.error));
+
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            } else if (state is TodoFormSuccessState) {
+              Navigator.of(context).pop();
+            }
+          },
         ),
       ),
     );
