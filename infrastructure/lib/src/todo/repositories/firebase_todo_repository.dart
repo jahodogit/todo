@@ -14,10 +14,11 @@ class FirebaseFirestoreTodoRepository implements TodoRepository {
 
   @override
   Stream<List<Todo>> getAll() {
-    Stream<QuerySnapshot<Map<String, dynamic>>> stream = _db.collection(_collectionName).snapshots();
+    const orderByField = 'createdDate';
+    Stream<QuerySnapshot<Map<String, dynamic>>> stream = _db.collection(_collectionName).orderBy(orderByField).snapshots();
     return stream.map((event) {
       return event.docs.map((doc) {
-        return TodoTranslator.fromDocumentToDomain(TodoDto.fromJson(doc.data()));
+        return TodoTranslator.fromDocumentToDomain(doc);
       }).toList();
     });
   }

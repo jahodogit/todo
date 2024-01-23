@@ -42,39 +42,26 @@ class _TodoItemWidgetState extends State<TodoItemWidget> {
               trailing: ElevatedButton(onPressed: () {}, child: const Text('Terminar')),
             ),
             BlocProvider(
-              create: (context) => TodoItemCubit(translatedTodoRepository: translatedTodoRepository),
+              create: (_) => TodoItemCubit(translatedTodoRepository: translatedTodoRepository),
               child: BlocConsumer<TodoItemCubit, TodoItemState>(
-                listener: (context, state) {
+                listener: (_, state) {
                   if (state is TodoItemErrorState) {}
                 },
-                builder: (context, state) {
+                builder: (context2, state) {
                   if (state is TodoItemInitialState) {
                     return Align(
                       alignment: Alignment.centerLeft,
                       child: TextButton(
                         onPressed: () {
-                          BlocProvider.of<TodoItemCubit>(context).getTodoItemTranslation(widget.todo);
+                          BlocProvider.of<TodoItemCubit>(context2).getTodoItemTranslation(widget.todo);
                         },
                         child: const Text('Translate'),
                       ),
                     );
                   } else if (state is TodoItemLoadingTranslateState) {
-                    return const SizedBox(
-                      height: 10,
-                      width: 10,
-                      child: CircularProgressIndicator(),
-                    );
+                    return const SizedBox(height: 10, width: 10, child: CircularProgressIndicator());
                   } else if (state is TodoItemSuccessTranslateState) {
-                    return Column(
-                      children: [
-                        const Divider(),
-                        ListTile(
-                          leading: const Icon(Icons.translate_sharp),
-                          title: Text(state.translatedTodo.title),
-                          subtitle: Text(state.translatedTodo.description),
-                        ),
-                      ],
-                    );
+                    return buildTranslationWidget(state);
                   } else if (state is TodoItemErrorState) {
                     return const Text('Error');
                   } else {
@@ -86,6 +73,19 @@ class _TodoItemWidgetState extends State<TodoItemWidget> {
           ],
         ),
       ),
+    );
+  }
+
+  Column buildTranslationWidget(TodoItemSuccessTranslateState state) {
+    return Column(
+      children: [
+        const Divider(),
+        ListTile(
+          leading: const Icon(Icons.translate_sharp),
+          title: Text(state.translatedTodo.title),
+          subtitle: Text(state.translatedTodo.description),
+        ),
+      ],
     );
   }
 }

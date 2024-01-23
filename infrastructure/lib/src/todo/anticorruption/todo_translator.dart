@@ -1,10 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:domain/domain.dart';
 import 'package:infrastructure/src/todo/dtos/todo_dto.dart';
 
 class TodoTranslator {
   static TodoDto fromDomainToDocument(Todo todo) {
     return TodoDto(
-      id: todo.id,
       title: todo.title,
       description: todo.description,
       isCompleted: todo.isCompleted,
@@ -13,11 +13,13 @@ class TodoTranslator {
     );
   }
 
-  static Todo fromDocumentToDomain(TodoDto todoDto) {
+  static Todo fromDocumentToDomain(QueryDocumentSnapshot<Map<String, dynamic>> doc) {
+    TodoDto todoDto = TodoDto.fromJson(doc.data());
+
     switch (todoDto.isCompleted) {
       case false:
         return Todo(
-          id: todoDto.id,
+          id: doc.id,
           title: todoDto.title,
           description: todoDto.description,
           isCompleted: todoDto.isCompleted,
@@ -25,7 +27,7 @@ class TodoTranslator {
         );
       case true:
         return CompletedTodo(
-          id: todoDto.id,
+          id: doc.id,
           title: todoDto.title,
           description: todoDto.description,
           isCompleted: todoDto.isCompleted,

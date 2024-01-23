@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:todo/app_home.dart';
+import 'package:todo/shared/routes.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -22,10 +23,11 @@ class TodoApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'R5 Todo app',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 35, 243, 42)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 35, 243, 42)),
         useMaterial3: true,
       ),
       home: const HomePage(),
+      routes: buildAppRoutes(),
     );
   }
 }

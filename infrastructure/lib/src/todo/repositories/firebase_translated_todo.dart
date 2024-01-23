@@ -12,8 +12,10 @@ class FirebaseTranslatedTodoRepository implements TranslatedTodoRepository {
   @override
   Future<TranslatedTodo> getTranslatedTodoByTodo(Todo todo) async {
     const translateDetailNameCollection = 'translate';
+    print('>> ingresa: : ${todo.id}');
     DocumentSnapshot<Map<String, dynamic>> snapshot = await _db.collection(_collectionName).doc(todo.id).get();
     TranslatedTodoDto dto = TranslatedTodoDto.fromJson(snapshot.data()![translateDetailNameCollection]);
+    print('>> encontrado: : ${dto.title}');
     TranslatedTodo translatedTodo = TranslatedTodoTranslator().fromDocumentToDomain(dto);
     return translatedTodo;
   }

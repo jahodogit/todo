@@ -36,24 +36,7 @@ class _TodoListPageState extends State<TodoListPage> {
               child: CircularProgressIndicator(),
             );
           } else if (state is TodoListSucessState) {
-            return StreamBuilder<List<Todo>>(
-                stream: state.todos,
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return Text('${snapshot.error}');
-                  } else if (snapshot.hasData) {
-                    List<Todo> todos = snapshot.data!;
-                    return ListView.builder(
-                      itemCount: todos.length,
-                      itemBuilder: (_, index) {
-                        Todo todo = todos[index];
-                        return TodoItemWidget(todo: todo);
-                      },
-                    );
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                });
+            return buildTodoStream(state);
           } else if (state is TodoListErrorState) {
             return Text(state.error);
           } else {
@@ -64,6 +47,31 @@ class _TodoListPageState extends State<TodoListPage> {
           if (state is TodoListErrorState) {}
         },
       ),
+    );
+  }
+
+  StreamBuilder<List<Todo>> buildTodoStream(TodoListSucessState state) {
+    return StreamBuilder<List<Todo>>(
+        stream: state.todos,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          } else if (snapshot.hasData) {
+            List<Todo> todos = snapshot.data!;
+            return buildTodoListView(todos);
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        });
+  }
+
+  ListView buildTodoListView(List<Todo> todos) {
+    return ListView.builder(
+      itemCount: todos.length,
+      itemBuilder: (_, index) {
+        Todo todo = todos[index];
+        return TodoItemWidget(todo: todo);
+      },
     );
   }
 }
