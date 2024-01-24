@@ -15,6 +15,6 @@ class CompletedTodo extends Todo {
 
   @override
   void validateDate() {
-    if (completedDate.isAfter(DateTime.now())) throw InvalidTodoDateException();
+    if (completedDate.isBefore(createdDate)) throw InvalidTodoDateException();
   }
 }

@@ -6,15 +6,19 @@ Siguiendo las recomendaciones de solid e implementando algunos patrones de dise√
 
 Para la capa de presentacion se implemento el patron BLoC para aislar la logica de la aplicacion de la UI y se uso Cubit como manejador de estados. 
 
-Nota: Desafortunadamente no cuento en este momento con un equipo Mac para la configuracion del proyecto para iOS,  sin embargo se siguieron las recomendaciones de firebase para el uso de la libreria desde iOS. 
+Nota: Desafortunadamente no cuento en este momento con un equipo Mac para la configuracion del proyecto para iOS,  sin embargo se siguieron las recomendaciones de firebase para el uso de la libreria usando flutterfire cli para su configuracion. 
 
+## Testing
+    - Dominio: Se realizaron unit tests a todos los modelos de dominio
+    - Infrastructura: Se decidio no hacer tests en esta capa,  debido a que solo se construiria un Mock del comportamiento de firestore y este no aportaria ningun valor.
+    
 
-## Funcionalidades
+## Funcionalidades:
 
     - Creacion de actividades
     - Traducccion de actividades a idioma ingles
-    - Cambio de estado de las actividades Abierta / Terminanda
-    - Eliminacion de activiades
+    - Cambio de estado de las actividades Abierta / Terminada
+    - Deslizar item para eliminar de actividad
 
 ## Detalle de las librerias usadas:
 

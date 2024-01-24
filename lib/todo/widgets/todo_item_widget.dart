@@ -5,6 +5,7 @@ import 'package:todo/di/dependencies_injection.dart';
 import 'package:todo/todo/bloc/todo_item/todo_item_cubit.dart';
 import 'package:todo/todo/bloc/todo_item/todo_item_state.dart';
 import 'package:todo/todo/bloc/todo_list/todo_list_cubit.dart';
+import 'package:intl/intl.dart';
 
 class TodoItemWidget extends StatefulWidget {
   const TodoItemWidget({super.key, required this.todo});
@@ -17,6 +18,7 @@ class TodoItemWidget extends StatefulWidget {
 
 class _TodoItemWidgetState extends State<TodoItemWidget> {
   bool showTranslation = false;
+  DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm');
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +33,18 @@ class _TodoItemWidgetState extends State<TodoItemWidget> {
         child: Card(
           elevation: 8.0,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ListTile(
                 title: Text(widget.todo.title),
-                subtitle: Text(widget.todo.description),
+                subtitle: buildTodoSubtitle(),
                 trailing: widget.todo.isCompleted
-                    ? const Text('Terminada')
+                    ? const Icon(Icons.check_circle)
                     : ElevatedButton(
                         onPressed: () {
                           BlocProvider.of<TodoListCubit>(context).updateStatus(widget.todo);
                         },
-                        child: const Text('Completar actividad')),
+                        child: const Text('Terminar')),
               ),
               BlocProvider(
                 create: (_) => getIt<TodoItemCubit>(),
@@ -76,6 +79,18 @@ class _TodoItemWidgetState extends State<TodoItemWidget> {
           ),
         ),
       ),
+    );
+  }
+
+  Column buildTodoSubtitle() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(widget.todo.description),
+        const SizedBox(height: 20),
+        Text('Creacion: ${formatter.format(widget.todo.createdDate)}'),
+        widget.todo.isCompleted ? Text('Terminacion: ${formatter.format(widget.todo.createdDate)}') : const SizedBox(),
+      ],
     );
   }
 
