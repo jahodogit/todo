@@ -15,12 +15,10 @@ class MockTodoRepository extends Mock implements FirebaseFirestoreTodoRepository
 
 void main() {
   late FirebaseFirestoreTodoRepository todoRepository;
-
+  setUp(() {
+    todoRepository = MockTodoRepository();
+  });
   group('TodoListCubit', () {
-    setUp(() {
-      todoRepository = MockTodoRepository();
-    });
-
     blocTest(
       '> getTodos request > Expect emits a TodoListSuccessState',
       build: () {
@@ -30,6 +28,16 @@ void main() {
       },
       act: (cubit) => cubit.getTodos(),
       expect: () => [isA<TodoListSucessState>()],
+    );
+
+    blocTest(
+      '> getTodos request and response with error > Expect emits empty list',
+      build: () {
+        when(() => todoRepository.getAll()).thenThrow(Exception);
+        return TodoListCubit(todoRepository: todoRepository);
+      },
+      act: (cubit) => cubit.getTodos(),
+      expect: () => [],
     );
   });
 }
